@@ -1,6 +1,8 @@
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+import os
 
 app = Flask(__name__)
 
@@ -11,10 +13,13 @@ db = SQLAlchemy(app)
 
 # Define the database model
 class FuelEfficiency(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    distance = db.Column(db.Float, nullable=False)
-    fuel = db.Column(db.Float, nullable=False)
-    efficiency = db.Column(db.Float, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)  # Primary Key
+    date = db.Column(db.String(50), nullable=False)  # Date of the record
+    distance_miles = db.Column(db.Float, nullable=False)  # Distance in miles
+    fuel_gallons = db.Column(db.Float, nullable=False)  # Fuel in gallons
+
+    def __repr__(self):
+        return f"<FuelRecord {self.date} - {self.distance_miles} miles, {self.fuel_gallons} gallons>"
 
 # Home route
 @app.route('/')
@@ -27,12 +32,24 @@ def track():
     if request.method == 'POST':
         distance = float(request.form['distance'])
         fuel = float(request.form['fuel'])
-        efficiency = distance / fuel
-        entry = FuelEfficiency(distance=distance, fuel=fuel, efficiency=efficiency)
+        efficiency = distance / fuel  # Calculate efficiency (miles per gallon)
+
+        # Add the entry to the database
+        entry = FuelEfficiency(
+            date=datetime.now().strftime("%Y-%m-%d"),
+            distance_miles=distance,
+            fuel_gallons=fuel
+        )
         db.session.add(entry)
         db.session.commit()
+
         return render_template('track.html', efficiency=efficiency)
-    return render_template('track.html')
+
+    return render_template('track.html', efficiency=None)
 
 if __name__ == '__main__':
+    with app.app_context():  # Use Flask app context
+        db.create_all()  # Create database tables
+        print("Database tables created successfully!")
+    print("Current directory:", os.getcwd())
     app.run(debug=True)

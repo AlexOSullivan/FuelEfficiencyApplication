@@ -3,21 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Track Fuel Efficiency</title>
+    <title>Fuel Efficiency Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="number"] {
+            padding: 5px;
+            margin: 10px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Track Fuel Efficiency</h1>
+    <h1>Fuel Efficiency Tracker</h1>
     <form method="POST">
-        <label for="distance">Distance (miles):</label>
-        <input type="number" name="distance" id="distance" step="0.1" required>
-        <br>
-        <label for="fuel">Fuel (gallons):</label>
-        <input type="number" name="fuel" id="fuel" step="0.1" required>
-        <br>
+        <input type="number" name="distance" placeholder="Distance (miles)" step="0.01" required>
+        <input type="number" name="fuel" placeholder="Fuel Used (gallons)" step="0.01" required>
         <button type="submit">Calculate Efficiency</button>
     </form>
-    {% if efficiency %}
-    <h2>Efficiency: {{ efficiency }} miles per gallon</h2>
+    {% if efficiency is not none %}
+    <div class="result">
+        <strong>Fuel Efficiency:</strong> {{ efficiency }} miles per gallon
+    </div>
     {% endif %}
 </body>
 </html>
