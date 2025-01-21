@@ -28,6 +28,7 @@
     <Content Include="instance\fuel_efficiency.db" />
     <Content Include="requirements.txt" />
     <Content Include="templates\index.html" />
+    <Content Include="templates\records.html" />
     <Content Include="templates\track.html" />
   </ItemGroup>
   <ItemGroup>

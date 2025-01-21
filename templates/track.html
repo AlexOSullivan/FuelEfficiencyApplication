@@ -46,6 +46,7 @@
         <input type="number" name="fuel" placeholder="Fuel Used (gallons)" step="0.01" required>
         <button type="submit">Calculate Efficiency</button>
     </form>
+    <a href="/records" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">View Records</a>
     {% if efficiency is not none %}
     <div class="result">
         <strong>Fuel Efficiency:</strong> {{ efficiency }} miles per gallon

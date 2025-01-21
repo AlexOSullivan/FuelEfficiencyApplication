@@ -47,6 +47,12 @@ def track():
 
     return render_template('track.html', efficiency=None)
 
+@app.route('/records')
+def records():
+    # Fetch all records from the database
+    all_records = FuelEfficiency.query.all()
+    return render_template('records.html', records=all_records)
+
 if __name__ == '__main__':
     with app.app_context():  # Use Flask app context
         db.create_all()  # Create database tables
