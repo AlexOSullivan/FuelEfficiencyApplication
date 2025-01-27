@@ -5,52 +5,170 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuel Efficiency Tracker</title>
     <style>
-        body {
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
+        }
+
+        /* Full-page background styling */
+        body {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: auto;
+        }
+
+        /* Centered content box */
+        .container {
             text-align: center;
-            margin-top: 50px;
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
+        /* Form styling */
         form {
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
-        input[type="text"], input[type="number"] {
-            padding: 5px;
+        input[type="number"] {
+            padding: 10px;
             margin: 10px;
-            width: 200px;
+            width: 80%;
+            max-width: 300px;
+            border: none;
+            border-radius: 5px;
         }
 
         button {
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #ff5733;
             color: #fff;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background 0.3s ease;
         }
 
             button:hover {
-                background-color: #0056b3;
+                background-color: #c70039;
             }
 
         .result {
             margin-top: 20px;
             font-size: 18px;
         }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #fff;
+            color: #000;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+            table th, table td {
+                padding: 10px;
+                text-align: center;
+                border: 1px solid #ddd;
+            }
+
+            table th {
+                background-color: #4e54c8;
+                color: #fff;
+            }
+
+        .back-link {
+            margin-top: 20px;
+            display: inline-block;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+            .back-link:hover {
+                background-color: #fff;
+                color: #4e54c8;
+            }
+
+        /* Pagination Buttons */
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+            .pagination .btn {
+                padding: 10px 20px;
+                margin: 5px;
+                background-color: #ff5733;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+                transition: background-color 0.3s ease;
+            }
+
+                .pagination .btn:hover {
+                    background-color: #c70039;
+                }
     </style>
 </head>
 <body>
-    <h1>Fuel Efficiency Tracker</h1>
-    <form method="POST">
-        <input type="number" name="distance" placeholder="Distance (miles)" step="0.01" required>
-        <input type="number" name="fuel" placeholder="Fuel Used (gallons)" step="0.01" required>
-        <button type="submit">Calculate Efficiency</button>
-    </form>
-    <a href="/records" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">View Records</a>
-    {% if efficiency is not none %}
-    <div class="result">
-        <strong>Fuel Efficiency:</strong> {{ efficiency }} miles per gallon
+    <div class="container">
+        <h1>Track Fuel Efficiency</h1>
+        <form method="POST">
+            <input type="number" name="distance" placeholder="Distance (miles)" step="0.01" required>
+            <input type="number" name="fuel" placeholder="Fuel Used (gallons)" step="0.01" required>
+            <button type="submit">Calculate Efficiency</button>
+        </form>
+        {% if efficiency is not none %}
+        <div class="result">
+            <strong>Fuel Efficiency:</strong> {{ efficiency }} miles per gallon
+        </div>
+        {% endif %}
+        {% if records %}
+        <h2>Your Records</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Distance (miles)</th>
+                <th>Fuel (gallons)</th>
+                <th>Efficiency (mpg)</th>
+            </tr>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.date }}</td>
+                <td>{{ record.distance_miles }}</td>
+                <td>{{ record.fuel_gallons }}</td>
+                <td>{{ "%.2f" % (record.distance_miles / record.fuel_gallons) }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <div class="pagination">
+            {% if has_prev %}
+            <a href="/track?page={{ page - 1 }}" class="btn">Previous</a>
+            {% endif %}
+            {% if has_next %}
+            <a href="/track?page={{ page + 1 }}" class="btn">Next</a>
+            {% endif %}
+        </div>
+        <a href="/" class="back-link">Back to Home</a>
     </div>
-    {% endif %}
 </body>
 </html>

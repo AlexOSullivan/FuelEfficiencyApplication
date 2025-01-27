@@ -4,9 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuel Efficiency Tracker</title>
+    <style>
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Full-page background styling */
+        body {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Centered content box */
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            background: #ff5733;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+            .btn:hover {
+                background: #c70039;
+            }
+
+        /* Heading styling */
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the Fuel Efficiency Tracker</h1>
-    <a href="/track">Track Fuel Efficiency</a>
+    <div class="container">
+        <h1>Welcome to the Fuel Efficiency Tracker</h1>
+        <p>
+            Monitor your vehicle's performance and fuel usage effortlessly.
+            Keep track of your fuel efficiency and optimize your driving habits.
+        </p>
+        <a href="/track" class="btn">Start Tracking Now</a>
+    </div>
 </body>
 </html>
