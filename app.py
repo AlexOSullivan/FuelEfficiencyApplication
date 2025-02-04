@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
+import matplotlib.pyplot as plt
+import io
+import base64
 
 app = Flask(__name__)
 
@@ -84,6 +87,35 @@ def track():
     )
 
 
+
+
+@app.route('/visualise')
+def visualise():
+    records = FuelEfficiency.query.order_by(FuelEfficiency.id.desc()).limit(10).all()  # Get last 10 records
+
+    if not records:
+        return render_template('visualise.html', chart_data=None)
+
+    dates = [record.date for record in records]
+    efficiencies = [record.distance_miles / record.fuel_gallons for record in records]
+
+    # Create the plot
+    plt.figure(figsize=(10, 5))
+    plt.plot(dates, efficiencies, marker='o', linestyle='-', color='b')
+    plt.xlabel('Date')
+    plt.ylabel('Efficiency (MPG)')
+    plt.title('Fuel Efficiency Over Time')
+    plt.xticks(rotation=45)
+    plt.grid()
+
+    # Save plot to a string
+    img = io.BytesIO()
+    plt.savefig(img, format='png', bbox_inches='tight')  # <-- Add bbox_inches='tight'
+    img.seek(0)
+    plot_url = base64.b64encode(img.getvalue()).decode()
+    plt.close()
+
+    return render_template('visualise.html', chart_data=plot_url)
 
 
 

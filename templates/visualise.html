@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel Efficiency Visualisation</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Fuel Efficiency Visualisation</h1>
+        <div class="graph-container">
+            {% if chart_data %}
+            <img src="data:image/png;base64,{{ chart_data }}" alt="Fuel Efficiency Chart">
+            {% else %}
+            <p>No records available for visualisation.</p>
+            {% endif %}
+        </div>
+        <br>
+        <a href="/track" class="back-link">Back to Tracking</a>
+    </div>
+</body>
+</html>

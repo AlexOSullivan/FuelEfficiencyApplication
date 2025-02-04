@@ -27,12 +27,15 @@
   <ItemGroup>
     <Content Include="instance\fuel_efficiency.db" />
     <Content Include="requirements.txt" />
+    <Content Include="static\css\styles.css" />
     <Content Include="templates\index.html" />
-    <Content Include="templates\records.html" />
     <Content Include="templates\track.html" />
+    <Content Include="templates\visualise.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="instance\" />
+    <Folder Include="static\" />
+    <Folder Include="static\css\" />
     <Folder Include="templates\" />
   </ItemGroup>
   <ItemGroup>

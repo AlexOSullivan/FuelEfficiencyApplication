@@ -1,0 +1,150 @@
+/* ====== General Reset ====== */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* ====== Full-page background styling ====== */
+body {
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+    color: #fff;
+    text-align: center;
+}
+
+/* ====== Centered Content Box ====== */
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ====== Form Styling ====== */
+form {
+    margin-top: 20px;
+}
+
+input[type="number"] {
+    padding: 10px;
+    margin: 10px;
+    width: 80%;
+    max-width: 300px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #ff5733;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+    button:hover {
+        background-color: #c70039;
+    }
+
+/* ====== Button Styling ====== */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #ff5733;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+    .btn:hover {
+        background-color: #c70039;
+    }
+
+/* ====== Result Styling ====== */
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+/* ====== Table Styling ====== */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+    table th, table td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #4e54c8;
+        color: #fff;
+    }
+
+/* ====== Back Link Styling ====== */
+.back-link {
+    margin-top: 20px;
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+    .back-link:hover {
+        background-color: #fff;
+        color: #4e54c8;
+    }
+
+/* ====== Pagination Buttons ====== */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+    .pagination .btn {
+        padding: 10px 20px;
+        margin: 5px;
+        background-color: #ff5733;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+        .pagination .btn:hover {
+            background-color: #c70039;
+        }
+
+/* ====== Graph Container Styling ====== */
+.graph-container {
+    text-align: center;
+    max-width: 90%;
+    margin: auto;
+}
+
+    .graph-container img {
+        width: 100%; 
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
